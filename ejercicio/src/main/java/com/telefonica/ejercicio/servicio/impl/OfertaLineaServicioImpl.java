@@ -117,20 +117,8 @@ public class OfertaLineaServicioImpl extends BaseServicioImpl<OfertaLinea, Long>
 //        consultaSQL.append(" ORDER BY vencimiento ASC;");
 
         try {
-//            connection = DriverManager.getConnection(this.url, this.username, this.password);
-//            preparedStatement = connection.prepareStatement(consultaSQL.toString());
-//            resultSet = preparedStatement.executeQuery();
-
             ofertaLineaLista = sessionFactory.getCurrentSession().createSQLQuery(consultaSQL.toString()).getResultList();
-            System.out.println("\n\n ARREGLO \n\n");
-            ofertaLineaLista.toString();
-            System.out.println("\n\n");
-            
-                    //            query.setParameter(0, fechaInicio, StandardBasicTypes.STRING);
-                    //            query.setParameter(1, fechaFin, StandardBasicTypes.STRING);
-                    //            query.setParameter(2, fechaInicio, StandardBasicTypes.STRING);
-                    //            query.setParameter(3, fechaFin, StandardBasicTypes.STRING);
-            
+
             return ofertaLineaLista;
         } catch (Exception e) {
             logger.error(e, e);
