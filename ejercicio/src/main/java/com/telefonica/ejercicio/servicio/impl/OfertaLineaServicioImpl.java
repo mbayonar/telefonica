@@ -94,7 +94,8 @@ public class OfertaLineaServicioImpl extends BaseServicioImpl<OfertaLinea, Long>
         System.out.println("FECHA FIN: " + (fechaFin));
         System.out.println("\n\n");
 
-        consultaSQL = new StringBuilder("SELECT *, (ofelin.fecha_fin - current_date) as vencimiento");
+//        consultaSQL = new StringBuilder("SELECT ofelin.*, (ofelin.fecha_fin - current_date) as vencimiento");
+        consultaSQL = new StringBuilder("SELECT ofelin.*");
         consultaSQL.append(" FROM oferta_linea ofelin");
         consultaSQL.append(" INNER JOIN oferta ofe ON ofelin.id_oferta = ofe.id ");
         consultaSQL.append(" INNER JOIN linea_movil lin ON ofelin.id_linea_movil = lin.id");
@@ -112,25 +113,24 @@ public class OfertaLineaServicioImpl extends BaseServicioImpl<OfertaLinea, Long>
         consultaSQL.append(fechaInicio);
         consultaSQL.append("' AND '");
         consultaSQL.append(fechaFin);
-        consultaSQL.append("') ORDER BY vencimiento ASC;");
+        consultaSQL.append("');");
+//        consultaSQL.append(" ORDER BY vencimiento ASC;");
 
         try {
-            connection = DriverManager.getConnection(this.url, this.username, this.password);
-            preparedStatement = connection.prepareStatement(consultaSQL.toString());
-            resultSet = preparedStatement.executeQuery();
-            Stream.Builder & amp;lt;Persona & amp;gt;
-            ofertaLineaLista = Stream.builder();
+//            connection = DriverManager.getConnection(this.url, this.username, this.password);
+//            preparedStatement = connection.prepareStatement(consultaSQL.toString());
+//            resultSet = preparedStatement.executeQuery();
 
-            for (ResultSet elemento : resultSet.get) {
-
-            }
-//            query.setParameter(0, fechaInicio, StandardBasicTypes.STRING);
-//            query.setParameter(1, fechaFin, StandardBasicTypes.STRING);
-//            query.setParameter(2, fechaInicio, StandardBasicTypes.STRING);
-//            query.setParameter(3, fechaFin, StandardBasicTypes.STRING);
+            ofertaLineaLista = sessionFactory.getCurrentSession().createSQLQuery(consultaSQL.toString()).getResultList();
+            System.out.println("\n\n ARREGLO \n\n");
+            ofertaLineaLista.toString();
             System.out.println("\n\n");
-            System.out.println(ofertaLineaLista.toString());
-            System.out.println("\n\n");
+            
+                    //            query.setParameter(0, fechaInicio, StandardBasicTypes.STRING);
+                    //            query.setParameter(1, fechaFin, StandardBasicTypes.STRING);
+                    //            query.setParameter(2, fechaInicio, StandardBasicTypes.STRING);
+                    //            query.setParameter(3, fechaFin, StandardBasicTypes.STRING);
+            
             return ofertaLineaLista;
         } catch (Exception e) {
             logger.error(e, e);
