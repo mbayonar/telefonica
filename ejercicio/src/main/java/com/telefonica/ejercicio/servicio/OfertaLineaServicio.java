@@ -1,6 +1,7 @@
 package com.telefonica.ejercicio.servicio;
 
 import com.telefonica.ejercicio.entidad.OfertaLinea;
+import com.telefonica.ejercicio.entidad.dto.OfertaLineaDTO;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -10,6 +11,6 @@ import java.util.List;
  */
 public interface OfertaLineaServicio extends BaseServicio<OfertaLinea, Long> {
 
-    public List<OfertaLinea> obtenerOfertasPorFecha(String fechaInicio, String fechaFin) throws Exception;
+    public List<OfertaLineaDTO> obtenerOfertasPorFecha(String fechaInicio, String fechaFin) throws Exception;
 
 }
